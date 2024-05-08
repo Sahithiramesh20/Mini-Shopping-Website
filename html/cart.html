@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <style>
+      .cart-item {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        position: relative; /* For positioning the delete button */
+      }
+
+      .cart-item img {
+        max-width: 100px;
+        max-height: 100px;
+      }
+
+      .delete-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: #ff4444;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="cartContainer"></div>
+    <h1 id="totalPrice"></h1>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const cartContainer = document.getElementById("cartContainer");
+        const totalPriceDisplay = document.getElementById("totalPrice");
+
+        let totalPrice = 0;
+
+        // Function to calculate total price
+        const calculateTotalPrice = () => {
+          totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
+          totalPriceDisplay.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+        };
+        
+
+        // Clear the cart container before rendering to prevent re-displaying deleted items
+        cartContainer.innerHTML = "";
+
+        if (cartItems.length > 0) {
+          cartItems.forEach((item, index) => {
+        
+            const itemContainer = document.createElement("div");
+            itemContainer.classList.add("cart-item");
+
+            const itemName = document.createElement("h3");
+            itemName.textContent = item.title;
+
+            const itemPrice = document.createElement("p");
+            itemPrice.textContent = `Price: $${item.price}`;
+
+            const itemDescription = document.createElement("p");
+            itemDescription.textContent = `Description: ${item.description}`;
+
+            const itemImage = document.createElement("img");
+            itemImage.src = item.image;
+            itemImage.alt = item.title;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-btn");
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", () => {
+              cartItems.splice(index, 1);
+              localStorage.setItem("cartItems", JSON.stringify(cartItems));
+              itemContainer.remove();
+              
+              if (cartItems.length === 0) {
+                window.close(); // Close the tab when the cart is empty
+              }
+            });
+            
+            itemContainer.appendChild(deleteButton);
+            itemContainer.appendChild(itemName);
+            itemContainer.appendChild(itemPrice);
+            itemContainer.appendChild(itemDescription);
+            itemContainer.appendChild(itemImage);
+
+            cartContainer.appendChild(itemContainer);
+          });
+          calculateTotalPrice();
+        } else {
+          window.close(); // Close the tab if cart is empty
+        }
+      });
+    </script>
+  </body>
+</html>

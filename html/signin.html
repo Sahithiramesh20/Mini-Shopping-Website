@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(74, 142, 225)
+            ;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+        }
+
+        #content {
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: rgb(39, 39, 238);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: rgb(9, 60, 214);
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <form action="#">
+            <h1>Sign In / Login</h1>
+            <input type="text" id="username" placeholder="Username" autocomplete="off"><br><br>
+            <input type="password" id="password" placeholder="Password" autocomplete="off"><br><br>
+            <input type="submit" value="Sign In">
+        </form>
+    </div>
+</body>
+</html>
+
+    </div>
+
+    <script>
+        // getting data from signup page which had stored in local storage
+        let storedUsername = localStorage.getItem("username");
+        let storedPassword = localStorage.getItem("password");
+
+        document.forms[0].addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let usernamesignin = event.target[0].value; // username
+            let passwordsignin = event.target[1].value; // Password
+
+            if (storedUsername === usernamesignin && storedPassword === passwordsignin) {
+                alert("Successfully logged in");
+                window.open("mainpage.html")
+            } else {
+                alert("Invalid username or password");
+            }
+        });
+    </script>
+</body>
+</html>

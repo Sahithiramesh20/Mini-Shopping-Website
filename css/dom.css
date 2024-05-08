@@ -1,0 +1,63 @@
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid rgb(193, 191, 191);
+}
+
+th, td {
+    padding: 10px;
+}
+
+#nav {
+    background-color: rgba(60, 95, 165, 0.247);
+    padding: 10px ;
+    text-align: center;
+}
+
+ #nav button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: rgb(33, 127, 221);
+    padding: 20px;
+} 
+#nav button:hover{
+    color: black;
+}
+
+/* Style for product images */
+table img {
+    /* max-width: 100px;
+    max-height: 100px; */
+}
+
+/* Style for view more and all buttons  */
+button {
+    background-color: rgb(16, 163, 48);
+    color: white;
+    border: none;
+}
+
+/* Center the table */
+#tablee {
+    margin: 0 auto;
+}
+#cart-icon {
+    text-align: right;
+    padding: 10px;
+    position: relative;
+    bottom: 4650px;
+}
+#cart-icon i {
+    font-size: 30px; /* Adjust the font size as needed */
+    color: black; /* Change the color according to your design */
+}
+#log button {
+        background-color: black;
+        position: relative;
+        bottom: 50px;
+        padding: 10px;
+}
+
